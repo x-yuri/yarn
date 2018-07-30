@@ -1,0 +1,5 @@
+{
+    "scripts": {
+        "cmd1": "echo $PATH | tr : \\\\n"
+    }
+}

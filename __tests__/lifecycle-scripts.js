@@ -178,6 +178,12 @@ test('should throw error when the script ends with an exit code', async () => {
   await expect(execCommand('test', 'script-fail')).rejects.toBeDefined();
 });
 
+test('should not add /usr/bin to PATH if already there', async () => {
+  const stdout = await execCommand('cmd1', 'usr-bin');
+  const occurences = stdout.split('\n').filter(l => l == path.dirname(process.execPath));
+  expect(occurences.length).toBe(1);
+});
+
 if (process.platform === 'darwin') {
   test('should throw error when the script ends with an exit signal', async () => {
     await expect(execCommand('test', 'script-segfault')).rejects.toBeDefined();
